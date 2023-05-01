@@ -1,0 +1,1 @@
+<h1>Essa é a pagina de contato</h1><?php /**PATH /home/neemias/Área de Trabalho/cusros/hdcevents/resources/views/contact.blade.php ENDPATH**/ ?>

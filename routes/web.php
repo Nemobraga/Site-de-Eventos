@@ -8,35 +8,19 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
 |
 */
 
-Route::get('/', function () {
-    $nome = 'Mateus';
-    $idade = 23;
-    $arr = [15,25,35,45,55];
-    $nomes = ['Matheus', 'Patrick', 'Luana','Jose' ,'Henriques'];
+use App\Http\Controllers\EventController;
 
-    return view(
-        'welcome',
-        ['nome' => $nome, 
-        'idade' => $idade, 
-        'trabalho' => 'Programador',
-        'arr' => $arr,
-        'nomes' => $nomes
-        ]);
-});
+Route::get('/', [EventController::class, 'index']);
+Route::get('/events/create', [EventController::class, 'create']);
+Route::get('/events/{id}', [EventController::class, 'show']);
+Route::post('/events', [EventController::class, 'store']);
 
-Route::get('/contact',function(){
+Route::get('/contact', function () {
+
     return view('contact');
-});
-
-Route::get('/produtos',function(){
-    return view('products');
-});
-
-Route::get('/produtosteste/{id}',function ($id = 6){
-    return view('product',['id' => $id]);
 });
