@@ -4,13 +4,17 @@
 
 <div id="search-container" class="col-md-12">
     <h1>Busque um evento</h1>
-    <form action="">
+    <form action="/" method="GET">
         <input type="text" id="search" name="search" class="form-control" placeholder="Procurar...">
     </form>
 </div>
 <div id="events-container" class="col-md-12">
-    <h2>Proximos Eventos</h2>
-    <p class="subtitle">Veja os eventos dos próximos dias</p>
+    <?php if($search): ?>
+    <h2>Buscando por<?php echo e($search); ?></h2> 
+    <?php else: ?>
+    <h2>Proxímos Eventos</h2>
+    <p class="subtitle">Veja os eventos dos próximos dias</h>
+    <?php endif; ?>
     <div id="cards-container" class="row">
         <?php $__currentLoopData = $events; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $event): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <div class="card col-md-3">
@@ -23,7 +27,9 @@
                 </div>
             </div>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-        <?php if(count($events)==0): ?>
+        <?php if(count($events)==0 && $search): ?>
+            <p>Não foi possivel encontrar nenhum evento com<?php echo e($search); ?>! <a href="/">Ver todos</a></p>
+        <?php elseif(count($events)==0): ?>
             <p>Não há eventos disponíveis</p>
         <?php endif; ?>
     </div>
