@@ -2,7 +2,8 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <title>@yield('title')</title>
 
@@ -31,6 +32,9 @@
                 <a href="/events/create" class="nav-link">Criar Eventos</a>
               </li>
               @auth
+              <li class="nav-item">
+                <a href="/dashboard" class="nav-link">Meus Eventos</a>
+              </li>
               <li class="nav-item">
                 <form action="/logout" method="POST">
                   @csrf
