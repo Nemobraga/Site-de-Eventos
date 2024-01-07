@@ -2,7 +2,8 @@
 <html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <title><?php echo $__env->yieldContent('title'); ?></title>
 
@@ -30,11 +31,31 @@
               <li class="nav-item">
                 <a href="/events/create" class="nav-link">Criar Eventos</a>
               </li>
+              <?php if(auth()->guard()->check()): ?>
               <li class="nav-item">
-                <a href="products" class="nav-link">Entrar</a>
+                <a href="/dashboard" class="nav-link">Meus Eventos</a>
               </li>
               <li class="nav-item">
-                <a href="product" class="nav-link">Cadastrar</a>
+                <form action="/logout" method="POST">
+                  <?php echo csrf_field(); ?>
+                  <a href="/logout" 
+                    class="nav-link"
+                    onclick="event.preventDefault();
+                    this.closest('form').submit();">
+                    Sair
+                  </a>
+                </form>
+              </li>
+              <?php endif; ?>
+              <?php if(auth()->guard()->guest()): ?>
+    
+              <li class="nav-item">
+                <a href="/login" class="nav-link">Entrar</a>
+              </li>
+              <li class="nav-item">
+                <a href="register" class="nav-link">Cadastrar</a>
+
+              <?php endif; ?>
               </li>
             </ul>
           </div>
